@@ -14,13 +14,28 @@ typedef struct node
 
 node_t *find(node_t *root, int val)
 {
+	node_t *p_iter;
+	
 	if (root == NULL) return NULL;
+
+	for (p_iter = root; p_iter != NULL; )
+	{
+		if (val < p_iter->val)         p_iter = p_iter->left;
+		else if (val > p_iter->val)    p_iter = p_iter->right;
+		else  return p_iter;
+	}
+	
+	return NULL;
+
+#if 0
 	if (val < root->val)
 		return find(root->left, val);
 	else if (val > root->val)
 		return find(root->right, val);
 	else
 		return root;
+#endif
+	
 }
 
 int height(node_t *root)
